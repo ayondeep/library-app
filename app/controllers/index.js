@@ -7,14 +7,14 @@ export default Ember.Controller.extend({
   emailAddress: '',
 
   isValid: Ember.computed.match('emailAddress', /^.+@.+\..+$/),
-  isDisabled: false,
+  isDisabled: Ember.computed.not('isValid'),
 
   actions: {
 
     saveInvitation() {
 
       const email = this.get('emailAddress');
-      alert(email)
+      alert(this.get('isValid'))
 
       const newInvitation = this.store.createRecord('invitation', { email: email });
       newInvitation.save();
